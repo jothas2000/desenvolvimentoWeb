@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Verificação de Usuário</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
     <div class="login-container">
         <h1>Login</h1>
@@ -29,4 +31,5 @@
         </form>
     </div>
 </body>
+
 </html>
