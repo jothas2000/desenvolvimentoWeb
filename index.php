@@ -1,3 +1,7 @@
+<?php
+error_reporting(E_ALL);
+ini_set('Display_Errors', '1');
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -23,11 +27,6 @@
             <div class="form-group">
                 <button type="submit">Entrar</button>
             </div>
-            <?php
-            if (isset($_GET['error'])) {
-                echo '<p class="error-message">Usuário ou senha incorretos!</p>';
-            }
-            ?>
         </form>
     </div>
 </body>
