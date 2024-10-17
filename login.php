@@ -1,7 +1,8 @@
 <?php
+session_start(); // Inicia a sessão
 
 $valid_username = "admin";
-$valid_password = "123456";
+$valid_password = "admin";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
