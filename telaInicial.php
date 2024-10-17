@@ -97,7 +97,7 @@ session_start();
 
     <div class="container">
         <h1>Conteúdo do Arquivo</h1>
-        <a href="adicionar.php" class="add-btn">Adicionar Nova Linha</a>
+        <a href="inserir.php" class="add-btn">Adicionar Nova Linha</a>
         <table>
             <tr>
                 <th>Índice</th> <!-- Coluna para o índice -->
