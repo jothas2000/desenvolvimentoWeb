@@ -1,0 +1,2 @@
+Criar uma sessão, usuário não logado não tem acesso a sessão e aos dados
+mudar o input para textarea
