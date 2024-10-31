@@ -39,10 +39,12 @@ session_start();
             margin-bottom: 5px;
         }
 
-        .form-group input {
+        .form-group textarea {
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
+            min-height: 100px; /* Altura mínima para a textarea */
+            resize: vertical; /* Permite redimensionamento vertical */
         }
 
         .form-group button {
@@ -67,7 +69,7 @@ session_start();
         <form action="adicionar.php" method="POST">
             <div class="form-group">
                 <label for="newLine">Nova Linha:</label>
-                <input type="text" id="newLine" name="newLine" required>
+                <textarea id="newLine" name="newLine" required></textarea>
             </div>
             <div class="form-group">
                 <button type="submit">Adicionar</button>

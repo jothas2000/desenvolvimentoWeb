@@ -8,12 +8,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty(trim($newLine))) {
         $filename = "arquivos/db.txt";  // Nome do arquivo
 
+        // Substitui quebras de linha por <br> para preservar quebras de linha ao exibir
+        $newLine = str_replace("\n", "", $newLine);
+
+        // Adiciona a nova linha com o delimitador e uma quebra de linha no final
+        $contentToAdd = $newLine . " ---END---" . PHP_EOL;
+
         // Abre o arquivo para adicionar a nova linha no final
         $file = fopen($filename, "a") or die("Não foi possível abrir o arquivo!");
-
-        // Adiciona a nova linha com uma quebra de linha no final
-        fwrite($file, $newLine . PHP_EOL);
-
+        fwrite($file, $contentToAdd); // Grava o conteúdo com o delimitador
         fclose($file);
 
         // Redireciona de volta para a tela de leitura de arquivo
@@ -23,3 +26,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "A linha não pode estar vazia!";
     }
 }
+?>

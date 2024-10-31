@@ -35,22 +35,28 @@ session_start();
             border-collapse: collapse;
         }
 
-        table,
-        th,
-        td {
+        th, td {
             border: 1px solid #ddd;
-        }
-
-        th,
-        td {
             padding: 12px;
             text-align: left;
+            vertical-align: top; /* Alinha o conteúdo ao topo */
+            width: 249px;
+
+        }
+
+        td {
+            word-wrap: break-word;
+            white-space: normal;
+            max-width: 100%; /* Define a largura máxima para quebra de linha */
         }
 
         .action-buttons {
             display: flex;
-            gap: 10px;
+            flex-direction: row; /* Empilha os botões verticalmente */
+            gap: 5px;
+            justify-content: space-evenly;
         }
+
 
         .edit-btn,
         .delete-btn {
@@ -90,6 +96,48 @@ session_start();
         .add-btn:hover {
             background-color: #1E88E5;
         }
+
+        .upload-form {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    gap: 15px;
+}
+
+.upload-form label {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+#fileToUpload {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+    background-color: #fff;
+}
+
+.upload-form button {
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.upload-form button:hover {
+    background-color: #1E88E5;
+}
+
     </style>
 </head>
 
@@ -97,10 +145,19 @@ session_start();
 
     <div class="container">
         <h1>Conteúdo do Arquivo</h1>
+
+        <!-- Formulário de Upload -->
+        <form action="upload.php" method="POST" enctype="multipart/form-data" class="upload-form">
+            <label for="fileToUpload">Adicionar Linha com Arquivo:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload" accept=".txt">
+            <button type="submit">Upload</button>
+        </form>
+
         <a href="inserir.php" class="add-btn">Adicionar Nova Linha</a>
+        
         <table>
             <tr>
-                <th>Índice</th> <!-- Coluna para o índice -->
+                <th>Índice</th>
                 <th>Linha</th>
                 <th>Ação</th>
             </tr>
@@ -109,17 +166,20 @@ session_start();
             
             // Verifica se o arquivo existe
             if (file_exists($filename)) {
-                $file = fopen($filename, "r") or die("Não foi possível abrir o arquivo!");
+                $fileContent = file_get_contents($filename);
+                
+                // Divide o conteúdo em linhas usando o delimitador
+                $entries = explode(" ---END---", $fileContent);
+                $lineNumber = 0;
 
-                $lineNumber = 0;  // Contador de linha
-            
-                // Lê e exibe cada linha com botões de edição e exclusão
-                while (!feof($file)) {
-                    $linha = fgets($file);  // Lê uma linha do arquivo
-                    if (trim($linha) != "") { // Ignora linhas vazias
+                foreach ($entries as $entry) {
+                    $linha = trim($entry);
+                    if (!empty($linha)) {
+                        // Substitui <br> pelo equivalente HTML para exibição
+                        $linhaFormatada = str_replace("<br>", "\n", htmlspecialchars($linha));
                         echo "<tr>";
-                        echo "<td>" . ($lineNumber + 1) . "</td>"; // Exibe o índice (linha + 1 para começar do 1)
-                        echo "<td>" . htmlspecialchars($linha) . "</td>";
+                        echo "<td>" . ($lineNumber + 1) . "</td>"; // Exibe o índice
+                        echo "<td>" . nl2br($linhaFormatada) . "</td>";
                         echo "<td class='action-buttons'>
                             <form action='editar.php' method='GET'>
                                 <input type='hidden' name='lineNumber' value='" . $lineNumber . "'>
@@ -132,13 +192,11 @@ session_start();
                             </form>
                           </td>";
                         echo "</tr>";
+                        $lineNumber++;
                     }
-                    $lineNumber++;
                 }
-
-                fclose(stream: $file);  // Fecha o arquivo
             } else {
-                echo "<tr><td colspan='3'>O arquivo não existe.</td></tr>"; // Atualizado para corresponder ao número de colunas
+                echo "<tr><td colspan='3'>O arquivo não existe.</td></tr>";
             }
             ?>
         </table>
