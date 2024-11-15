@@ -1,17 +1,18 @@
-# desenvolvimentoWeb
-Projetos de desenvolvimento web
+# web development
 
-Baixe o xampp ligue ele
+Download xampp turn it on
 
-faça download do repositorio
+download the repository
 
-coloque ele na htdocs	
+put it in htdocs
 
-abra o navegador, digite na barra de endereço 127.0.0.1
+open the browser, type in the address bar 127.0.0.1
 
-entre na pasta até chegar na index
+go into the folder until you reach the index
 
+user: admin
 
+password: admin
 
 
 usuario: admin 
