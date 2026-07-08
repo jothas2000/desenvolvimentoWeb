@@ -1,39 +1,23 @@
 <?php
-session_start();
+require_once 'includes/auth.php';
 
-if (isset($_POST['lineNumber'])) {
-    $lineToDeleteIndex = (int) $_POST['lineNumber'];  // Índice da linha a ser excluída
-
-    $filename = "arquivos/db.txt";
-    $tempFile = "temp.txt";
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['lineNumber'])) {
+    $lineToDelete = (int) $_POST['lineNumber'];
+    $filename = 'data/db.txt';
 
     if (file_exists($filename)) {
-        $file = fopen($filename, "r");
-        $newFile = fopen($tempFile, "w");
+        $lines = file($filename, FILE_IGNORE_NEW_LINES);
 
-        $currentLineIndex = 0;
-
-        // Lê o arquivo original e escreve no temporário, exceto a linha a ser excluída
-        while (!feof($file)) {
-            $linha = fgets($file);
-            if ($currentLineIndex !== $lineToDeleteIndex) {
-                fwrite($newFile, $linha);
-            }
-            $currentLineIndex++;
+        if (isset($lines[$lineToDelete])) {
+            unset($lines[$lineToDelete]);
+            $lines = array_values($lines);
+            file_put_contents($filename, implode(PHP_EOL, $lines) . PHP_EOL, LOCK_EX);
         }
-
-        fclose($file);
-        fclose($newFile);
-
-        // Substitui o arquivo original pelo arquivo temporário
-        rename($tempFile, $filename);
-
-        // Redireciona de volta para a tela de leitura de arquivo
-        header("Location: telaInicial.php");
-        exit();
-    } else {
-        echo "Arquivo não encontrado!";
     }
-} else {
-    echo "Nenhuma linha foi selecionada para exclusão.";
+
+    header('Location: telaInicial.php');
+    exit;
 }
+
+header('Location: telaInicial.php');
+exit;
