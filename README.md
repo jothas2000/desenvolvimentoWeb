@@ -58,8 +58,6 @@ Sistema de gestão simples e funcional desenvolvido em **PHP puro**, sem depend�
 |------------|-------|
 | `admin`    | `admin` |
 
-> ⚠ Altere as credenciais no ficheiro `login.php` antes de utilizar em produção.
-
 ---
 
 ## Estrutura do Projecto
