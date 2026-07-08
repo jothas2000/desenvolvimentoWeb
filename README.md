@@ -1,10 +1,10 @@
-# 📄 Gestão de Conteúdo — CRUD com Arquivo de Texto
+# Gestão de Conteúdo — CRUD com Arquivo de Texto
 
 Sistema de gestão simples e funcional desenvolvido em **PHP puro**, sem dependência de base de dados SQL. Utiliza um arquivo de texto (`db.txt`) como armazenamento, sendo ideal para projetos pequenos, protótipos ou ambientes de aprendizagem.
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 - **Autenticação de utilizador** — login protegido por sessão PHP.
 - **CRUD completo** — criar, ler, editar e remover linhas no arquivo de texto.
@@ -14,7 +14,7 @@ Sistema de gestão simples e funcional desenvolvido em **PHP puro**, sem depend�
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **PHP 8.x** — processamento server-side puro (sem frameworks).
 - **HTML5 + CSS3** — interface leve e responsiva.
@@ -23,7 +23,7 @@ Sistema de gestão simples e funcional desenvolvido em **PHP puro**, sem depend�
 
 ---
 
-## 🚀 Como Executar (XAMPP)
+## Como Executar (XAMPP)
 
 ### Pré-requisitos
 
@@ -62,7 +62,7 @@ Sistema de gestão simples e funcional desenvolvido em **PHP puro**, sem depend�
 
 ---
 
-## 📁 Estrutura do Projecto
+## Estrutura do Projecto
 
 ```
 ├── assets/
@@ -88,7 +88,7 @@ Sistema de gestão simples e funcional desenvolvido em **PHP puro**, sem depend�
 
 ---
 
-## 🔒 Segurança
+## Segurança
 
 - Sessão regenerada (`session_regenerate_id`) após login bem-sucedido.
 - Validação de autenticação em todas as páginas protegidas via `includes/auth.php`.
@@ -97,4 +97,4 @@ Sistema de gestão simples e funcional desenvolvido em **PHP puro**, sem depend�
 
 ---
 
-📌 **Projecto mínimo, funcional e didáctico.** Ideal para quem está a aprender PHP ou precisa de um CRUD leve sem base de dados.
+**Projecto mínimo, funcional e didáctico.** Ideal para quem está a aprender PHP ou precisa de um CRUD leve sem base de dados.
